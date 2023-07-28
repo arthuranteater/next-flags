@@ -1,16 +1,5 @@
-"use client";
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-
-// dark:focus:ring-blue-500
-// dark:focus:border-blue-500
-
-//      focus:ring-blue-500
-//focus:border-blue-500
-
-//focus-visible:ring-0
-//focus:ring-0
 
 export default function Searchbar({ handleChange }) {
   return (

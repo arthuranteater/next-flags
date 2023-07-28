@@ -1,10 +1,13 @@
 "use client";
+import { use, useContext } from "react";
 import CardContainer from "./card-container";
 import Searchbar from "./searchbar";
 import { useState, useEffect } from "react";
 import Filter from "./filter";
+import { DarkModeContext } from "@/utils/context/dark-mode";
 
 export default function MainContainer({ countries }) {
+  const { dark } = useContext(DarkModeContext);
   const [selected, setSelected] = useState(countries);
   const [input, setInput] = useState("");
   const [regions, setRegions] = useState([]);
@@ -39,8 +42,8 @@ export default function MainContainer({ countries }) {
   }, [input, countries]);
 
   return (
-    <>
-      <div className="ml-10 mr-10 flex flex-wrap justify-between items-center">
+    <div className={dark ? "dark" : ""}>
+      <div className="ml-10 mr-10 mt-10 flex flex-wrap justify-between items-center">
         <Searchbar handleChange={handleChange} input={input} />
         <Filter
           regionsSelected={regions}
@@ -48,6 +51,6 @@ export default function MainContainer({ countries }) {
         />
       </div>
       <CardContainer selected={selected} />
-    </>
+    </div>
   );
 }
