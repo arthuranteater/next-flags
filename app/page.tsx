@@ -1,8 +1,8 @@
-import MainContainer from "./components/main-container";
+import Home from "./components/home";
 import { getCountries } from "../utils/api/countries";
 
-export default async function Homepage() {
+export default async function HomePage() {
   const countries = await getCountries();
-  return <MainContainer countries={countries} />;
+  return <Home countries={countries} />;
 }
 

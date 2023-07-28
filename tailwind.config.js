@@ -25,14 +25,3 @@ module.exports = {
   },
   plugins: [],
 };
-
-// - Dark Blue (Elements): `hsl(209, 23%, 22%)`
-// - Very Dark Blue (Background): `hsl(207, 26%, 17%)`
-// - White (Text): `hsl(0, 0%, 100%)`
-
-// **Light Mode**
-
-// - Very Dark Blue (Text): `hsl(200, 15%, 8%)`
-// - Dark Gray (Input): `hsl(0, 0%, 52%)`
-// - Very Light Gray (Background): `hsl(0, 0%, 98%)`
-// - White (Elements): `hsl(0, 0%, 100%)`

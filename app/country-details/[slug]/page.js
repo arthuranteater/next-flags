@@ -1,9 +1,6 @@
 import { getCountries } from "../../../utils/api/countries";
 import { getCountry } from "../../../utils/api/countries";
 import CountryDetail from "../../components/country-detail";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export async function generateStaticParams() {
   const countries = await getCountries();
@@ -18,19 +15,8 @@ export async function generateStaticParams() {
   });
 }
 
-export default async function Page({ params }) {
+export default async function DetailsPage({ params }) {
   const country = await getCountry(params.slug.replace("-", " "));
 
-  return (
-    <div>
-      <Link
-        href="/"
-        className="flex justify-center items-center ml-10 border rounded w-[100px] h-[40px]"
-      >
-        <FontAwesomeIcon icon={faArrowLeft} />
-        <span className="ml-2">Back</span>
-      </Link>
-      <CountryDetail country={country[0]} />
-    </div>
-  );
+  return <CountryDetail country={country[0]} />;
 }
