@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Nunito_Sans } from 'next/font/google'
 import DarkModeProvider from "./components/dark-mode-provider";
 import Navbar from "./components/navbar";
+import Footer from './components/footer'
 
 
 const nunito = Nunito_Sans({ 
@@ -26,7 +27,8 @@ export default function RootLayout({
       <body>
         <DarkModeProvider>
           <Navbar title={metadata.title}/>
-        {children}
+          {children}
+        <Footer/>
         </DarkModeProvider>
         </body>
     </html>

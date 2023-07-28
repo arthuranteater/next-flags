@@ -3,15 +3,16 @@ import { useState, useEffect, createContext } from "react";
 import { DarkModeContext } from "../../utils/context/dark-mode";
 
 export default function DarkModeProvider({ children }) {
-  const localValue = localStorage.dark;
+  const [dark, setDark] = useState(false);
 
-  const browserValue =
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const initialState = localValue !== undefined ? localValue : browserValue;
-
-  const [dark, setDark] = useState(initialState);
+  //initial state
+  useEffect(() => {
+    const localValue = localStorage.dark;
+    const browserValue =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setDark(localValue !== undefined ? localValue : browserValue);
+  }, []);
 
   //update localStorage
   useEffect(() => {
