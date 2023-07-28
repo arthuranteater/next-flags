@@ -13,7 +13,7 @@ export default function Filter({ regionsSelected, handleFilterChange }) {
       <button
         id="dropdownDefaultButton"
         data-dropdown-toggle="dropdown"
-        className="font-medium rounded text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="font-medium rounded text-sm px-5 py-2.5 text-center text-dark-txt inline-flex items-center dark:bg-dark-el"
         type="button"
         onClick={() => setShowFilters(!showFilters)}
       >
@@ -38,7 +38,7 @@ export default function Filter({ regionsSelected, handleFilterChange }) {
         id="dropdown"
         className={`${
           showFilters ? "" : "hidden"
-        } z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 z-10`}
+        } z-10 bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 z-10`}
       >
         <ul
           className="py-2 text-sm text-gray-700 dark:text-gray-200 p-4"

@@ -4,7 +4,11 @@ import Link from "next/link";
 export default function Card({ country }) {
   return (
     <Link href={`/country-details/${country.name.common.replace(" ", "-")}`}>
-      <div className="w-60 rounded overflow-hidden shadow-lg">
+      <div
+        className="w-60 rounded 
+      overflow-hidden 
+      shadow-lg"
+      >
         <div id="img-wrapper" className="h-48 relative">
           <Image
             src={country.flags.svg}
