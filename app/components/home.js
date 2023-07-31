@@ -4,6 +4,7 @@ import Searchbar from "./searchbar";
 import { useState, useEffect, useContext } from "react";
 import Filter from "./filter";
 import { DarkModeContext } from "@/utils/context/dark-mode";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Home({ countries }) {
   const { dark } = useContext(DarkModeContext);
@@ -43,18 +44,31 @@ export default function Home({ countries }) {
   }, [input, countries]);
 
   return (
-    <div className={dark ? "dark" : ""}>
-      <div className="min-h-screen text-color-txt dark:text-dark-txt bg-color-bg dark:bg-dark-bg pl-10 pr-10 pt-20 pb-20">
-        <div className="flex flex-wrap justify-between items-center mt-6">
-          <Searchbar handleChange={handleChange} input={input} />
-          <Filter
-            regionsSelected={regions}
-            handleFilterChange={handleFilterChange}
-            setRegions={setRegions}
-          />
+    <div>
+      {dark === loading ? (
+        <ClipLoader
+          color={color}
+          loading={loading}
+          cssOverride={override}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
+        <div className={dark ? "dark" : ""}>
+          <div className="min-h-screen text-color-txt dark:text-dark-txt bg-color-bg dark:bg-dark-bg pl-10 pr-10 pt-20 pb-20">
+            <div className="flex flex-wrap justify-between items-center mt-6">
+              <Searchbar handleChange={handleChange} input={input} />
+              <Filter
+                regionsSelected={regions}
+                handleFilterChange={handleFilterChange}
+                setRegions={setRegions}
+              />
+            </div>
+            <CardContainer selected={selected} />
+          </div>
         </div>
-        <CardContainer selected={selected} />
-      </div>
+      )}
     </div>
   );
 }
