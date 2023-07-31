@@ -12,6 +12,8 @@ export default function Home({ countries }) {
   const [input, setInput] = useState("");
   const [regions, setRegions] = useState([]);
 
+  console.log("dark home", dark);
+
   const handleFilterChange = (event) => {
     const selectedRegion = event.target.value;
 
