@@ -21,7 +21,8 @@ export default function DarkModeProvider({ children }) {
 
   //update localStorage
   useEffect(() => {
-    localStorage.dark = dark;
+    localStorage.setItem("dark", dark);
+    console.log(localStorage.getItem("dark");
   }, [dark]);
 
   //capture browser updates
