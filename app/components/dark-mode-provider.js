@@ -8,7 +8,7 @@ export default function DarkModeProvider({ children }) {
   //initial state
   useEffect(() => {
     const local = localStorage.getItem("dark");
-    if (local !== undefined) {
+    if (local !== null || local !== undefined) {
       console.log("local", local);
       setDark(local);
       return;
