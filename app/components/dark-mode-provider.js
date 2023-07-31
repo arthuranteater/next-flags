@@ -13,7 +13,7 @@ export default function DarkModeProvider({ children }) {
       setDark(local);
       return;
     }
-    console.log('undefined')
+    console.log("undefined");
     const browser =
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -23,7 +23,7 @@ export default function DarkModeProvider({ children }) {
   //update localStorage
   useEffect(() => {
     localStorage.setItem("dark", dark);
-    console.log(localStorage.getItem("dark");
+    console.log(localStorage.getItem("dark"));
   }, [dark]);
 
   //capture browser updates
