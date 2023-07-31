@@ -4,6 +4,7 @@ import { DarkModeContext } from "../../utils/context/dark-mode";
 
 export default function DarkModeProvider({ children }) {
   const [dark, setDark] = useState("loading");
+  console.log("dark", dark);
 
   //initial state
   useEffect(() => {
