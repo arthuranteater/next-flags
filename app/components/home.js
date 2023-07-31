@@ -45,7 +45,7 @@ export default function Home({ countries }) {
 
   return (
     <div>
-      {dark === loading ? (
+      {dark === "loading" ? (
         <ClipLoader
           color={color}
           loading={loading}
