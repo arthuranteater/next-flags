@@ -13,6 +13,7 @@ export default function DarkModeProvider({ children }) {
       setDark(local);
       return;
     }
+    console.log('undefined')
     const browser =
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches;
