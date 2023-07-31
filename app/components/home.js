@@ -47,9 +47,8 @@ export default function Home({ countries }) {
     <div>
       {dark === "loading" ? (
         <ClipLoader
-          color={color}
-          loading={loading}
-          cssOverride={override}
+          color="red"
+          loading={true}
           size={150}
           aria-label="Loading Spinner"
           data-testid="loader"
