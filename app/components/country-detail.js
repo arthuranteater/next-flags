@@ -1,16 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "@/utils/state/context";
-import { BreadcrumbsContext } from "@/utils/state/context";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
 
 export default function CountryDetail({ country, borderCountries }) {
-  const { breadcrumbs, setBreadcrumbs, index, setIndex } =
-    useContext(BreadcrumbsContext);
+  const [showBackButton, setShowBackButton] = useState(false);
+
+  useEffect(() => {
+    if (window.history.length > 1) {
+      setShowBackButton(true);
+    }
+  }, []);
+
+  const router = useRouter();
 
   const {
     name: { nativeName, common },
@@ -25,9 +32,13 @@ export default function CountryDetail({ country, borderCountries }) {
 
   const borderCountryNames = borderCountries.map(({ name }) => name.common);
 
-  console.log("borderCountryNames", borderCountryNames);
+  const nativeNamesArray = Object.values(nativeName).map(
+    ({ common }) => common
+  );
 
-  const nativeNames = Object.values(nativeName).map(({ common }) => common);
+  const nativeNamesFiltered = nativeNamesArray.filter(
+    (name, index) => nativeNamesArray.indexOf(name) === index
+  );
 
   const curriencesFiltered = Object.values(currencies).map(({ name }) => name);
 
@@ -38,18 +49,18 @@ export default function CountryDetail({ country, borderCountries }) {
   return (
     <div className={dark ? "dark" : ""}>
       <div className="py-20 min-h-screen text-color-txt dark:text-dark-txt bg-color-bg dark:bg-dark-bg flex flex-wrap w-auto gap-10 justify-center items-center">
-        {breadcrumbs.length > 1 ? (
-          <Link
-            href={breadcrumbs[breadcrumbs.length - (index + 1)]}
-            onClick={() => setIndex(index + 1)}
+        {showBackButton ? (
+          <button
+            onClick={() => router.back()}
             className="flex justify-center items-center ml-10 border rounded w-[100px] h-[40px]"
           >
             <FontAwesomeIcon icon={faArrowLeft} />
             <span className="ml-2">Back</span>
-          </Link>
+          </button>
         ) : (
           <></>
         )}
+
         <div className="relative w-[500px] p-6">
           <Image
             src={flags.svg}
@@ -65,10 +76,10 @@ export default function CountryDetail({ country, borderCountries }) {
             <ul>
               <li className="font-bold mb-4">
                 Native Name(s):{" "}
-                {nativeNames.map((name) => (
+                {nativeNamesFiltered.map((name) => (
                   <span className="font-normal" key={name}>
                     {name}
-                    {name !== nativeNames.slice(-1)[0] ? ", " : ""}
+                    {name !== nativeNamesFiltered.slice(-1)[0] ? ", " : ""}
                   </span>
                 ))}
               </li>
@@ -121,7 +132,7 @@ export default function CountryDetail({ country, borderCountries }) {
           </div>
           <div className="mt-10">
             <span className="font-bold">Border Countries: </span>
-            {borderCountryNames ? (
+            {borderCountryNames.length ? (
               borderCountryNames.map((name) => (
                 <Link
                   key={name}
