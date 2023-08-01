@@ -3,16 +3,15 @@ import CardContainer from "./card-container";
 import Searchbar from "./searchbar";
 import { useState, useEffect, useContext } from "react";
 import Filter from "./filter";
-import { DarkModeContext } from "@/utils/context/dark-mode";
-import ClipLoader from "react-spinners/ClipLoader";
+import { DarkModeContext } from "@/utils/state/context";
+import ClipLoader from "react-spinners/BarLoader";
+import BounceLoader from "react-spinners/BounceLoader";
 
 export default function Home({ countries }) {
   const { dark } = useContext(DarkModeContext);
   const [selected, setSelected] = useState(countries);
   const [input, setInput] = useState("");
   const [regions, setRegions] = useState([]);
-
-  console.log("dark home", dark);
 
   const handleFilterChange = (event) => {
     const selectedRegion = event.target.value;
@@ -48,10 +47,15 @@ export default function Home({ countries }) {
   return (
     <div>
       {dark === "loading" ? (
-        <ClipLoader
-          color="red"
+        <BounceLoader
+          cssOverride={{
+            color: "text-color-txt",
+            top: "50%",
+            right: "50%",
+            position: "fixed",
+          }}
           loading={true}
-          size={150}
+          size={300}
           aria-label="Loading Spinner"
           data-testid="loader"
         />

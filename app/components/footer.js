@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useContext } from "react";
-import { DarkModeContext } from "../../utils/context/dark-mode";
+import { DarkModeContext } from "../../utils/state/context";
 
 export default function Footer() {
   const { dark } = useContext(DarkModeContext);

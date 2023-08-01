@@ -1,7 +1,7 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { DarkModeContext } from "@/utils/context/dark-mode";
+import { DarkModeContext } from "@/utils/state/context";
 import { useContext } from "react";
 
 export default function Searchbar({ handleChange }) {

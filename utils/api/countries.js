@@ -9,3 +9,10 @@ export async function getCountry(name) {
   );
   return await res.json();
 }
+
+export async function getBorderCountries(codes) {
+  const res = await fetch(
+    `https://restcountries.com/v3.1/alpha?codes=${codes}`
+  );
+  return await res.json();
+}
