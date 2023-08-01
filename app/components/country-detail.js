@@ -84,7 +84,10 @@ export default function CountryDetail({ country, borderCountries }) {
                 ))}
               </li>
               <li className="font-bold mb-4">
-                Population: <span className="font-normal">{population}</span>
+                Population:{" "}
+                <span className="font-normal">
+                  {population.toLocaleString("en-US")}
+                </span>
               </li>
               <li className="font-bold mb-4">
                 Region: <span className="font-normal">{region}</span>

@@ -32,7 +32,10 @@ export default function Card({ country }) {
           <div className="font-bold text-lg mb-2 line-clamp-2">{common}</div>
           <ul>
             <li className="font-bold text-sm">
-              Population: <span className="font-normal">{population}</span>
+              Population:{" "}
+              <span className="font-normal">
+                {population.toLocaleString("en-US")}
+              </span>
             </li>
             <li className="font-bold text-sm">
               Region: <span className="font-normal">{region}</span>
