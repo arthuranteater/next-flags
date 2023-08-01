@@ -21,7 +21,7 @@ export default function Card({ country }) {
           <div id="img-wrapper" className="h-full w-full relative ">
             <Image
               src={flags.svg}
-              alt={`Flag of ${name.common}`}
+              alt={`Flag of ${common}`}
               width={0}
               height={0}
               style={{ width: "100%", maxHeight: "100%" }}
@@ -29,9 +29,7 @@ export default function Card({ country }) {
           </div>
         </div>
         <div className="px-6 py-4">
-          <div className="font-bold text-lg mb-2 line-clamp-2">
-            {name.common}
-          </div>
+          <div className="font-bold text-lg mb-2 line-clamp-2">{common}</div>
           <ul>
             <li className="font-bold text-sm">
               Population: <span className="font-normal">{population}</span>
