@@ -15,15 +15,18 @@ export default function Searchbar({ handleChange }) {
         Search
       </label>
       <div
-        className="flex  text-color-input 
+        className="flex text-color-input 
           dark:text-dark-input
+          bg-color-el
           dark:bg-dark-el
           border
           dark:border-none 
           rounded
+          pl-4
+          min-w-[270px]
           "
       >
-        <div className="flex items-center justify-center pl-4 pointer-events-none">
+        <div className="flex items-center justify-center pointer-events-none">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
 
@@ -31,7 +34,8 @@ export default function Searchbar({ handleChange }) {
           type="search"
           id="default-search"
           className={`${dark ? "dark" : ""} block
-          w-80 p-4 pl-6 
+          min-w-[200px]
+          p-4 pl-4 
           text-sm
           dark:bg-dark-el
           rounded

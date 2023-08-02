@@ -1,13 +1,19 @@
 "use client";
 import { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faArrowDownWideShort,
+  faArrowDownShortWide,
+} from "@fortawesome/free-solid-svg-icons";
 import { UseClickAway } from "../../utils/hooks/useClickAway";
 
 export default function Filter({
   regionsSelected,
   handleFilterChange,
   setRegions,
+  isAscending,
+  setIsAscending,
 }) {
   const allRegions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   const [showFilters, setShowFilters] = useState(false);
@@ -19,7 +25,20 @@ export default function Filter({
   const ref = UseClickAway(handleClose);
 
   return (
-    <div className="flex text-color-txt dark:text-dark-txt bg-color-el dark:bg-dark-el">
+    <div className="flex flex-wrap gap-6 text-color-txt dark:text-dark-txt">
+      {showFilters ? (
+        <></>
+      ) : (
+        <button
+          className="font-medium text-sm w-32 rounded bg-color-el dark:bg-dark-el"
+          onClick={() => setIsAscending(!isAscending)}
+        >
+          <span className="mr-2">Sort</span>
+          <FontAwesomeIcon
+            icon={isAscending ? faArrowDownWideShort : faArrowDownShortWide}
+          />
+        </button>
+      )}
       {showFilters ? (
         <></>
       ) : regionsSelected.length > 0 ? (
@@ -28,9 +47,9 @@ export default function Filter({
             e.stopPropagation();
             setRegions([]);
           }}
-          className="mr-3 font-medium text-sm w-32  rounded"
+          className="font-medium text-sm w-32 rounded bg-color-el dark:bg-dark-el"
         >
-          Clear All Filters
+          Clear Filters
         </button>
       ) : (
         <></>
@@ -38,7 +57,7 @@ export default function Filter({
       <div
         ref={ref}
         onClick={(e) => e.stopPropagation()}
-        className="flex justify-center w-40 dark:text-dark-txt dark:bg-dark-el rounded"
+        className="flex justify-center w-40 bg-color-el dark:bg-dark-el rounded"
       >
         <div>
           <button

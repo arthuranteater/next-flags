@@ -1,18 +1,47 @@
 "use client";
 import CardContainer from "./card-container";
 import Searchbar from "./searchbar";
-import { useState, useEffect, useContext } from "react";
+import { useState, useMemo, useContext } from "react";
 import Filter from "./filter";
 import { DarkModeContext } from "@/utils/state/context";
 import ClipLoader from "react-spinners/BarLoader";
 import BounceLoader from "react-spinners/BounceLoader";
 
+//sort helper
+const sortCountries = (asc) => {
+  return function ({ name: { common: nameA } }, { name: { common: nameB } }) {
+    const a = nameA.toLowerCase();
+    const b = nameB.toLowerCase();
+    if (a < b) return asc ? -1 : 1;
+    if (a > b) return asc ? 1 : -1;
+    return 0;
+  };
+};
+
 export default function Home({ countries }) {
   const { dark } = useContext(DarkModeContext);
-  const [selected, setSelected] = useState(countries);
   const [input, setInput] = useState("");
   const [regions, setRegions] = useState([]);
+  const [isAscending, setIsAscending] = useState(true);
 
+  //handle waterfall calc
+  const countriesFiltered = useMemo(() => {
+    let countriesArr = countries;
+    if (regions.length > 0) {
+      countriesArr = countriesArr.filter(({ region }) =>
+        regions.includes(region)
+      );
+    }
+    if (input) {
+      countriesArr = countriesArr.filter(
+        ({ name: { common } }) =>
+          common.toLowerCase().indexOf(input.toLowerCase()) === 0
+      );
+    }
+    return countriesArr.sort(sortCountries(isAscending));
+  }, [regions, countries, isAscending, input]);
+
+  //handle filter change
   const handleFilterChange = (event) => {
     const selectedRegion = event.target.value;
 
@@ -23,29 +52,13 @@ export default function Home({ countries }) {
     setRegions([...regions, selectedRegion]);
   };
 
-  useEffect(() => {
-    if (regions.length > 0) {
-      setSelected(countries.filter(({ region }) => regions.includes(region)));
-      return;
-    }
-    setSelected(countries);
-  }, [regions, countries]);
-
+  //handle input change
   const handleChange = (event) => {
     setInput(event.target.value);
   };
 
-  useEffect(() => {
-    setSelected(
-      countries.filter(
-        (country) =>
-          country.name.common.toLowerCase().indexOf(input.toLowerCase()) === 0
-      )
-    );
-  }, [input, countries]);
-
   return (
-    <div>
+    <div className="w-screen">
       {dark === "loading" ? (
         <BounceLoader
           cssOverride={{
@@ -55,7 +68,6 @@ export default function Home({ countries }) {
             position: "fixed",
           }}
           loading={true}
-          size={300}
           aria-label="Loading Spinner"
           data-testid="loader"
         />
@@ -68,9 +80,11 @@ export default function Home({ countries }) {
                 regionsSelected={regions}
                 handleFilterChange={handleFilterChange}
                 setRegions={setRegions}
+                isAscending={isAscending}
+                setIsAscending={setIsAscending}
               />
             </div>
-            <CardContainer selected={selected} />
+            <CardContainer countriesFiltered={countriesFiltered} />
           </div>
         </div>
       )}
