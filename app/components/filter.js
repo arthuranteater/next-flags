@@ -30,7 +30,7 @@ export default function Filter({
         <></>
       ) : (
         <button
-          className="font-medium text-sm w-32 rounded bg-color-el dark:bg-dark-el"
+          className="border dark:border-none font-medium text-sm w-32 rounded-lg bg-color-el dark:bg-dark-el"
           onClick={() => setIsAscending(!isAscending)}
         >
           <span className="mr-2">Sort</span>
@@ -47,7 +47,7 @@ export default function Filter({
             e.stopPropagation();
             setRegions([]);
           }}
-          className="font-medium text-sm w-32 rounded bg-color-el dark:bg-dark-el"
+          className="border dark:border-none font-medium text-sm w-32 rounded-lg bg-color-el dark:bg-dark-el"
         >
           Clear Filters
         </button>
@@ -57,7 +57,7 @@ export default function Filter({
       <div
         ref={ref}
         onClick={(e) => e.stopPropagation()}
-        className="flex justify-center w-40 bg-color-el dark:bg-dark-el rounded"
+        className="border dark:border-none flex justify-center w-40 bg-color-el dark:bg-dark-el rounded-lg"
       >
         <div>
           <button

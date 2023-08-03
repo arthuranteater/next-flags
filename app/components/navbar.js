@@ -1,13 +1,32 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { DarkModeContext } from "../../utils/state/context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMoon,
+  faUserAstronaut,
+  faRightFromBracket,
+  faLeftFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import { faMoon as faMoonLight } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { get } from "http";
 
 export default function Navbar({ title }) {
   const { dark, setDark } = useContext(DarkModeContext);
+  const isUserLoggedIn = true;
+  const username = "Profile";
+  const [providers, setProviders] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  useEffect(() => {
+    const setProviders = async () => {
+      const response = await getProviders();
+      setProviders(response);
+    };
+    setProviders();
+  }, []);
 
   return (
     <nav
@@ -21,19 +40,94 @@ export default function Navbar({ title }) {
             {title}
           </span>
         </Link>
-        <div className="flex md:order-2">
-          <button
-            type="button"
-            className="dark:bg-dark-bg focus:outline-none font-medium rounded text-sm px-4 py-2 text-center mr-3 md:mr-0"
-            onClick={() => setDark(!dark)}
+        <div className="flex justify-end">
+          <div className="flex">
+            <button
+              type="button"
+              className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
+              onClick={() => setDark(!dark)}
+            >
+              <FontAwesomeIcon
+                icon={dark ? faMoon : faMoonLight}
+                className="mr-2"
+              />
+              {dark ? "Light" : "Dark"}
+            </button>
+          </div>
+          {isUserLoggedIn ? (
+            <div
+              id="profile-desktop"
+              className="sm: flex justify-center items-center"
+            >
+              <Link
+                href="/profile"
+                className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
+              >
+                <FontAwesomeIcon icon={faUserAstronaut} className="mr-2" />
+                {username}
+              </Link>
+            </div>
+          ) : (
+            <></>
+          )}
+          <div
+            id="login-desktop"
+            className="sm: flex justify-center items-center"
           >
-            {dark ? (
-              <FontAwesomeIcon icon={faMoon} className="mr-2" />
+            {isUserLoggedIn ? (
+              <button
+                onClick={signOut}
+                className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
+              >
+                <FontAwesomeIcon
+                  icon={isUserLoggedIn ? faRightFromBracket : faLeftFromBracket}
+                  className="mr-2"
+                />
+                Logout
+              </button>
             ) : (
-              <FontAwesomeIcon icon={faMoonLight} className="mr-2" />
+              <>
+                {providers &&
+                  Object.values(providers).map((provider) => (
+                    <button
+                      type="button"
+                      key={provider}
+                      onClick={() => signIn(provider.id)}
+                    >
+                      Login
+                    </button>
+                  ))}
+              </>
             )}
-            Dark Mode
-          </button>
+          </div>
+          {/* login mobile */}
+          <div id="login-mobile" className="flex sm: hidden">
+            {isUserLoggedIn ? (
+              <button
+                onClick={signOut}
+                className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
+              >
+                <FontAwesomeIcon
+                  icon={isUserLoggedIn ? faRightFromBracket : faLeftFromBracket}
+                  className="mr-2"
+                />
+                Logout
+              </button>
+            ) : (
+              <>
+                {providers &&
+                  Object.values(providers).map((provider) => (
+                    <button
+                      type="button"
+                      key={provider}
+                      onClick={() => signIn(provider.id)}
+                    >
+                      Login
+                    </button>
+                  ))}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </nav>

@@ -8,10 +8,7 @@ export default function Searchbar({ handleChange }) {
   const { dark } = useContext(DarkModeContext);
   return (
     <form className="flex items-center justify-center">
-      <label
-        htmlFor="default-search"
-        className="mb-2 text-sm font-medium sr-only"
-      >
+      <label htmlFor="default-search" className="text-sm font-medium sr-only">
         Search
       </label>
       <div
@@ -21,12 +18,12 @@ export default function Searchbar({ handleChange }) {
           dark:bg-dark-el
           border
           dark:border-none 
-          rounded
+          rounded-lg
           pl-4
           min-w-[270px]
           "
       >
-        <div className="flex items-center justify-center pointer-events-none">
+        <div className="text-color-txt dark:text-dark-txt flex items-center justify-center pointer-events-none">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
 
@@ -34,11 +31,10 @@ export default function Searchbar({ handleChange }) {
           type="search"
           id="default-search"
           className={`${dark ? "dark" : ""} block
-          min-w-[200px]
+          min-w-[230px]
           p-4 pl-4 
           text-sm
           dark:bg-dark-el
-          rounded
           focus:outline-none
           dark:appearance-none
           `}

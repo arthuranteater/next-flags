@@ -2,12 +2,9 @@
 import { useState, useEffect } from "react";
 import { DarkModeContext } from "../../utils/state/context";
 import BarLoader from "react-spinners/BarLoader";
-import { usePathname } from "next/navigation";
 
 export default function Providers({ children }) {
   const [dark, setDark] = useState("loading");
-
-  const pathname = usePathname();
 
   //initial state
   useEffect(() => {
