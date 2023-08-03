@@ -32,7 +32,7 @@ export default function Searchbar({ handleChange }) {
           id="default-search"
           className={`${dark ? "dark" : ""} block
           min-w-[230px]
-          p-4 pl-4 
+          p-4 pl-4 py-6
           text-sm
           dark:bg-dark-el
           focus:outline-none

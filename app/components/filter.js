@@ -5,6 +5,8 @@ import {
   faCheck,
   faArrowDownWideShort,
   faArrowDownShortWide,
+  faCaretDown,
+  faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { UseClickAway } from "../../utils/hooks/useClickAway";
 
@@ -14,6 +16,7 @@ export default function Filter({
   setRegions,
   isAscending,
   setIsAscending,
+  countryCount,
 }) {
   const allRegions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   const [showFilters, setShowFilters] = useState(false);
@@ -25,15 +28,16 @@ export default function Filter({
   const ref = UseClickAway(handleClose);
 
   return (
-    <div className="flex flex-wrap gap-6 text-color-txt dark:text-dark-txt">
+    <div className="flex flex-wrap justify-center items-center gap-6 text-color-txt dark:text-dark-txt">
       {showFilters ? (
         <></>
       ) : (
         <button
-          className="border dark:border-none font-medium text-sm w-32 rounded-lg bg-color-el dark:bg-dark-el"
+          className="border dark:border-none font-medium text-sm w-32 rounded-lg bg-color-el dark:bg-dark-el py-6 sm:py-2"
           onClick={() => setIsAscending(!isAscending)}
         >
           <span className="mr-2">Sort</span>
+          <span className="mr-2">{countryCount}</span>
           <FontAwesomeIcon
             icon={isAscending ? faArrowDownWideShort : faArrowDownShortWide}
           />
@@ -47,7 +51,7 @@ export default function Filter({
             e.stopPropagation();
             setRegions([]);
           }}
-          className="border dark:border-none font-medium text-sm w-32 rounded-lg bg-color-el dark:bg-dark-el"
+          className="border dark:border-none font-medium text-sm w-32 rounded-lg bg-color-el dark:bg-dark-el py-6 sm:py-2"
         >
           Clear Filters
         </button>
@@ -63,39 +67,31 @@ export default function Filter({
           <button
             id="dropdownDefaultButton"
             data-dropdown-toggle="dropdown"
-            className="font-medium rounded text-sm p-2 text-center inline-flex items-center"
+            className="font-medium rounded text-sm p-2 text-center inline-flex items-center py-6 sm:py-2"
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               setShowFilters(!showFilters);
             }}
           >
-            Filter By Region{" "}
-            <svg
-              className="w-2.5 h-2.5 ml-2.5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 10 6"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 1 4 4 4-4"
-              />
-            </svg>
+            <span className="mr-2">Filter By Region</span>
+            <FontAwesomeIcon icon={showFilters ? faCaretUp : faCaretDown} />
           </button>
           <div
             id="dropdown"
             className={`${
               showFilters ? "" : "hidden"
-            } border-t z-10 bg-white divide-y divide-gray-100 w-32 dark:bg-dark-el`}
+            } absolute rounded border z-10 bg-white  divide-gray-100 w-32 dark:bg-dark-el`}
           >
-            <ul className="p-4 text-sm" aria-labelledby="dropdownDefaultButton">
+            <ul
+              className="p-4 text-sm divide-y"
+              aria-labelledby="dropdownDefaultButton"
+            >
               {allRegions.map((region) => (
-                <li className="mt-2 grid grid-cols-2 gap-2" key={region}>
+                <li
+                  className="py-6 sm:py-3 grid grid-cols-2 gap-1"
+                  key={region}
+                >
                   <div className="flex flex-col w-10 justify-items-start items-start">
                     <button value={region} onClick={handleFilterChange}>
                       {region}

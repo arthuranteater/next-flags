@@ -73,8 +73,8 @@ export default function Home({ countries }) {
         />
       ) : (
         <div className={dark ? "dark" : ""}>
-          <div className="min-h-screen text-color-txt dark:text-dark-txt bg-color-bg dark:bg-dark-bg pl-10 pr-10 pt-20 pb-20">
-            <div className="flex flex-wrap justify-between items-center mt-6">
+          <div className="min-h-screen text-color-txt dark:text-dark-txt bg-color-bg dark:bg-dark-bg pl-10 pr-10 pt-[125px] sm:pt-20 pb-20">
+            <div className="flex gap-6 flex-col sm:flex-row justify-center sm:justify-between items-center mt-6">
               <Searchbar handleChange={handleChange} input={input} />
               <Filter
                 regionsSelected={regions}
@@ -82,6 +82,7 @@ export default function Home({ countries }) {
                 setRegions={setRegions}
                 isAscending={isAscending}
                 setIsAscending={setIsAscending}
+                countryCount={countriesFiltered.length}
               />
             </div>
             <CardContainer countriesFiltered={countriesFiltered} />
