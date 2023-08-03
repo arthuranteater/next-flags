@@ -52,7 +52,7 @@ export default function CountryDetail({ country, borderCountries }) {
         {showBackButton ? (
           <button
             onClick={() => router.back()}
-            className="flex justify-center items-center ml-10 border rounded w-[100px] h-[40px]"
+            className="flex justify-center items-center ml-10 border rounded-lg w-[100px] h-[40px]"
           >
             <FontAwesomeIcon icon={faArrowLeft} />
             <span className="ml-2">Back</span>

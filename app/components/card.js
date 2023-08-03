@@ -12,9 +12,10 @@ export default function Card({ country }) {
   return (
     <Link href={`/country-details/${common.replace(" ", "-")}`}>
       <div
-        className="w-60 rounded 
+        className="w-60 rounded-lg 
       overflow-hidden 
       shadow
+      bg-color-el
       dark:bg-dark-el"
       >
         <div className="flex items-start h-48 border-b">

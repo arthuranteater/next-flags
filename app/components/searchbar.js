@@ -12,7 +12,7 @@ export default function Searchbar({ handleChange }) {
         Search
       </label>
       <div
-        className="flex text-color-input 
+        className="flex text-color-txt 
           dark:text-dark-input
           bg-color-el
           dark:bg-dark-el
