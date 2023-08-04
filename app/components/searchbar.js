@@ -4,7 +4,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { DarkModeContext } from "@/utils/state/context";
 import { useContext } from "react";
 
-export default function Searchbar({ handleChange }) {
+export default function Searchbar({ handleChange, countryCount }) {
   const { dark } = useContext(DarkModeContext);
   return (
     <form className="flex items-center justify-center">
@@ -25,8 +25,8 @@ export default function Searchbar({ handleChange }) {
       >
         <div className="text-color-txt dark:text-dark-txt flex items-center justify-center pointer-events-none">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
+          <span className="ml-2">{countryCount}</span>
         </div>
-
         <input
           type="search"
           id="default-search"

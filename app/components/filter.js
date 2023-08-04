@@ -3,8 +3,7 @@ import { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
-  faArrowDownWideShort,
-  faArrowDownShortWide,
+  faArrowRight,
   faCaretDown,
   faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
@@ -14,9 +13,8 @@ export default function Filter({
   regionsSelected,
   handleFilterChange,
   setRegions,
-  isAscending,
-  setIsAscending,
-  countryCount,
+  sort,
+  setSort,
 }) {
   const allRegions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   const [showFilters, setShowFilters] = useState(false);
@@ -27,21 +25,33 @@ export default function Filter({
 
   const ref = UseClickAway(handleClose);
 
+  const { isAlpha, isAToZ, isSmToLg } = sort;
+
   return (
     <div className="flex flex-wrap justify-center items-center gap-6 text-color-txt dark:text-dark-txt">
       {showFilters ? (
         <></>
       ) : (
-        <button
-          className="border dark:border-none font-medium text-sm w-32 rounded-lg bg-color-el dark:bg-dark-el py-6 sm:py-2"
-          onClick={() => setIsAscending(!isAscending)}
-        >
-          <span className="mr-2">Sort</span>
-          <span className="mr-2">{countryCount}</span>
-          <FontAwesomeIcon
-            icon={isAscending ? faArrowDownWideShort : faArrowDownShortWide}
-          />
-        </button>
+        <>
+          <button
+            className="border dark:border-none font-medium text-sm w-32 rounded-lg bg-color-el dark:bg-dark-el py-6 sm:py-2"
+            onClick={() => setSort({ ...sort, isAlpha: true, isAToZ: !isAToZ })}
+          >
+            <span className="mr-2">{isAToZ ? "Z" : "A"}</span>
+            <FontAwesomeIcon icon={faArrowRight} />
+            <span className="ml-2">{isAToZ ? "A" : "Z"}</span>
+          </button>
+          <button
+            className="border dark:border-none font-medium text-sm w-32 rounded-lg bg-color-el dark:bg-dark-el py-6 sm:py-2"
+            onClick={() =>
+              setSort({ ...sort, isAlpha: false, isSmToLg: !isSmToLg })
+            }
+          >
+            <span className="mr-2">{isSmToLg ? "Lg" : "Sm"}</span>
+            <FontAwesomeIcon icon={faArrowRight} />
+            <span className="ml-2">{isSmToLg ? "Sm" : "Lg"}</span>
+          </button>
+        </>
       )}
       {showFilters ? (
         <></>

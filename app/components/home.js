@@ -8,10 +8,14 @@ import ClipLoader from "react-spinners/BarLoader";
 import BounceLoader from "react-spinners/BounceLoader";
 
 //sort helper
-const sortCountries = (asc) => {
-  return function ({ name: { common: nameA } }, { name: { common: nameB } }) {
-    const a = nameA.toLowerCase();
-    const b = nameB.toLowerCase();
+const sortCountries = ({ isAlpha, isAToZ, isSmToLg }) => {
+  return function (
+    { population: popA, name: { common: nameA } },
+    { population: popB, name: { common: nameB } }
+  ) {
+    const a = isAlpha ? nameA.toLowerCase() : popA;
+    const b = isAlpha ? nameB.toLowerCase() : popB;
+    const asc = isAlpha ? isAToZ : isSmToLg;
     if (a < b) return asc ? -1 : 1;
     if (a > b) return asc ? 1 : -1;
     return 0;
@@ -22,7 +26,11 @@ export default function Home({ countries }) {
   const { dark } = useContext(DarkModeContext);
   const [input, setInput] = useState("");
   const [regions, setRegions] = useState([]);
-  const [isAscending, setIsAscending] = useState(true);
+  const [sort, setSort] = useState({
+    isAlpha: true,
+    isAToZ: true,
+    isSmToLg: false,
+  });
 
   //handle waterfall calc
   const countriesFiltered = useMemo(() => {
@@ -38,8 +46,8 @@ export default function Home({ countries }) {
           common.toLowerCase().indexOf(input.toLowerCase()) === 0
       );
     }
-    return countriesArr.sort(sortCountries(isAscending));
-  }, [regions, countries, isAscending, input]);
+    return countriesArr.sort(sortCountries(sort));
+  }, [regions, countries, sort, input]);
 
   //handle filter change
   const handleFilterChange = (event) => {
@@ -75,13 +83,17 @@ export default function Home({ countries }) {
         <div className={dark ? "dark" : ""}>
           <div className="min-h-screen text-color-txt dark:text-dark-txt bg-color-bg dark:bg-dark-bg pl-10 pr-10 pt-[125px] sm:pt-20 pb-20">
             <div className="flex gap-6 flex-col sm:flex-row justify-center sm:justify-between items-center mt-6">
-              <Searchbar handleChange={handleChange} input={input} />
+              <Searchbar
+                countryCount={countriesFiltered.length}
+                handleChange={handleChange}
+                input={input}
+              />
               <Filter
                 regionsSelected={regions}
                 handleFilterChange={handleFilterChange}
                 setRegions={setRegions}
-                isAscending={isAscending}
-                setIsAscending={setIsAscending}
+                setSort={setSort}
+                sort={sort}
                 countryCount={countriesFiltered.length}
               />
             </div>
