@@ -19,13 +19,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  session
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  session: any
 }) {
   return (
     <html lang="en" className={`${nunito.variable}`}>
       <body>
-        <Providers>
+        <Providers session={session}>
           <Navbar title={metadata.title}/>
           {children}
         <Footer/>

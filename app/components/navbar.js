@@ -9,29 +9,31 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { faMoon as faMoonLight } from "@fortawesome/free-regular-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { UseClickAway } from "@/utils/hooks/useClickAway";
 
 export default function Navbar({ title }) {
   const { dark, setDark } = useContext(DarkModeContext);
-  const isUserLoggedIn = true;
-  const username = "Profile";
+  const { data: session } = useSession();
+  console.log("session.user", session?.user);
   const [providers, setProviders] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
-    const setProviders = async () => {
+    (async () => {
       const response = await getProviders();
       setProviders(response);
-    };
-    setProviders();
+    })();
   }, []);
 
   const handleClose = () => {
     console.log("clicked away");
     setShowDropdown(false);
   };
+
+  console.log("providers", providers);
 
   const ref = UseClickAway(handleClose);
 
@@ -58,7 +60,7 @@ export default function Navbar({ title }) {
                 {dark ? "Light" : "Dark"}
               </button>
             </div>
-            {isUserLoggedIn ? (
+            {session?.user ? (
               <div
                 id="profile-desktop"
                 className="flex justify-center items-center"
@@ -68,7 +70,7 @@ export default function Navbar({ title }) {
                   className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
                 >
                   <FontAwesomeIcon icon={faUserAstronaut} className="mr-2" />
-                  {username}
+                  {session.user.name}
                 </Link>
               </div>
             ) : (
@@ -78,7 +80,7 @@ export default function Navbar({ title }) {
               id="login-desktop"
               className="sm: flex justify-center items-center"
             >
-              {isUserLoggedIn ? (
+              {session?.user ? (
                 <button
                   onClick={signOut}
                   className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
@@ -93,8 +95,10 @@ export default function Navbar({ title }) {
                       <button
                         type="button"
                         key={provider}
+                        className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
                         onClick={() => signIn(provider.id)}
                       >
+                        <FontAwesomeIcon icon={faGoogle} className="mr-2" />
                         Login
                       </button>
                     ))}
@@ -154,9 +158,7 @@ export default function Navbar({ title }) {
                     >
                       <FontAwesomeIcon
                         icon={
-                          isUserLoggedIn
-                            ? faRightFromBracket
-                            : faLeftFromBracket
+                          session?.user ? faRightFromBracket : faLeftFromBracket
                         }
                         className="mr-2"
                       />
