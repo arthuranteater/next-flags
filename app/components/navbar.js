@@ -6,7 +6,6 @@ import {
   faMoon,
   faUserAstronaut,
   faRightFromBracket,
-  faLeftFromBracket,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { faMoon as faMoonLight } from "@fortawesome/free-regular-svg-icons";
@@ -84,12 +83,7 @@ export default function Navbar({ title }) {
                   onClick={signOut}
                   className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
                 >
-                  <FontAwesomeIcon
-                    icon={
-                      isUserLoggedIn ? faRightFromBracket : faLeftFromBracket
-                    }
-                    className="mr-2"
-                  />
+                  <FontAwesomeIcon icon={faRightFromBracket} className="mr-2" />
                   Logout
                 </button>
               ) : (

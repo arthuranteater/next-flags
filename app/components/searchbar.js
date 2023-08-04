@@ -7,7 +7,10 @@ import { useContext } from "react";
 export default function Searchbar({ handleChange, countryCount }) {
   const { dark } = useContext(DarkModeContext);
   return (
-    <form className="flex items-center justify-center">
+    <form
+      className="flex items-center justify-center"
+      onClick={(e) => e.preventDefault()}
+    >
       <label htmlFor="default-search" className="text-sm font-medium sr-only">
         Search
       </label>
