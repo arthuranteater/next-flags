@@ -28,7 +28,11 @@ function About() {
     },
     {
       href: "search-input",
-      story: "Filter by search",
+      story: "Filter by search input on change",
+    },
+    {
+      href: "view-number",
+      story: "View number of results in saerch bar",
     },
     {
       href: "sort-alpha",
@@ -61,8 +65,18 @@ function About() {
         "While logged-in can click a toggle on country card to add/remove from favorites list",
     },
     {
-      href: "user-profile",
-      story: "While logged-in can view my starred countries on profile page",
+      href: "view-profile",
+      story: "While logged-in can view favorite countries on profile page",
+    },
+    {
+      href: "drag-list",
+      story:
+        "While logged-in on profile page user can drag starred into been there and wish list",
+    },
+    {
+      href: "User",
+      story:
+        "While logged-in on profile page user can drag countries to arrange order",
     },
   ];
 
