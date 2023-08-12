@@ -1,82 +1,105 @@
-import React from "react";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function About() {
   const userStories = [
     {
       href: "view-all",
       story: "View all countries as cards with summary info",
+      completed: true,
     },
     {
       href: "click-card",
       story: "Click on a country to go to detailed country page",
+      completed: true,
     },
     {
       href: "view-details",
       story: "View country details on details page",
+      completed: true,
     },
     {
       href: "click-border",
       story: "Click on border country to go detailed country page",
+      completed: true,
     },
     {
       href: "click-back",
       story: "Click back button on details page to go to previous page",
+      completed: true,
     },
     {
       href: "filter-region",
       story: "Filter countries by region",
+      completed: true,
     },
     {
       href: "search-input",
       story: "Filter by search input on change",
+      completed: true,
     },
     {
       href: "view-number",
-      story: "View number of results in saerch bar",
+      story: "View number of results in search bar",
+      completed: true,
     },
     {
       href: "sort-alpha",
       story: "Sort countries alphabetically (A to Z, Z to A)",
+      completed: true,
     },
     {
       href: "sort-population",
       story: "Sort countries by population (Sm to Lg, Lg to Sm)",
+      completed: true,
     },
     {
       href: "click-dark",
       story: "Click dark toggle to turn on/off dark mode",
+      completed: true,
     },
     {
       href: "save-dark",
       story: "When revisiting prev dark mode preference is loaded",
+      completed: true,
     },
     {
       href: "initial-dark",
-      story:
-        "When first visiting dark mode preference is loaded from user preferences",
+      story: "If no prev visit, dark mode is loaded from user preferences",
+      completed: true,
     },
     {
       href: "user-login",
       story: "Click a log-in button, enter credentials and log-in",
+      completed: false,
     },
     {
       href: "click-star",
       story:
-        "While logged-in can click a toggle on country card to add/remove from favorites list",
+        "Click toggle on country card/details page to add/remove from favorites (Logged-in user only)",
+      completed: false,
+    },
+    {
+      href: "view-prompt",
+      story:
+        "Receive prompt to login upon clicking star icon on card/details page",
+      completed: false,
     },
     {
       href: "view-profile",
-      story: "While logged-in can view favorite countries on profile page",
+      story: "View favorites on profile page (Logged-in user only)",
+      completed: false,
     },
     {
       href: "drag-list",
       story:
-        "While logged-in on profile page user can drag starred into been there and wish list",
+        "Drag favorites into visited and wish list categories on profile page (Logged-in user only)",
+      completed: false,
     },
     {
       href: "User",
-      story:
-        "While logged-in on profile page user can drag countries to arrange order",
+      story: "Drag countries to arrange order in lists (Logged-in user only)",
+      completed: false,
     },
   ];
 
@@ -110,10 +133,14 @@ function About() {
           <p>Click on user story to skip to that section</p>
           <p>As a user I can...</p>
           <ul>
-            {userStories.map(({ href, story }, i) => (
-              <li className="flex gap-2 flex-wrap mb-2" key={story}>
-                <p>{`${i + 1})`}</p>
+            {userStories.map(({ href, story, completed }, i) => (
+              <li
+                className="grid grid-cols-[30px_minmax(0,_500px)_50px] gap-2 mb-2 border-b"
+                key={story}
+              >
+                <span>{`${i + 1})`}</span>
                 <a href={`#${href}`}>{story}</a>
+                {completed && <FontAwesomeIcon icon={faCheck} />}
               </li>
             ))}
           </ul>
