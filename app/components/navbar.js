@@ -7,6 +7,8 @@ import {
   faUserAstronaut,
   faRightFromBracket,
   faBars,
+  faChartSimple,
+  faFlag,
 } from "@fortawesome/free-solid-svg-icons";
 import { faMoon as faMoonLight } from "@fortawesome/free-regular-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -41,12 +43,22 @@ export default function Navbar({ title }) {
     <nav className={`${dark ? "dark" : ""} w-full z-10 fixed top-0`}>
       <div className="gap-6 text-color-txt dark:text-dark-txt bg-color-el border-gray-200 dark:bg-dark-el flex flex-col sm:flex-row items-center justify-center sm:justify-between mx-auto p-2 sm:p-4">
         <Link href="/" className="flex items-center sm:ml-10">
+          <FontAwesomeIcon icon={faFlag} className="mr-2" />
           <span className="self-center text-xl font-bold whitespace-nowrap">
             {title}
           </span>
         </Link>
         <div className="flex justify-end">
           <div className="hidden sm:flex justify-end">
+            <div className="flex justify-center items-center">
+              <Link
+                href="/about"
+                className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
+              >
+                <FontAwesomeIcon icon={faChartSimple} className="mr-2" />
+                About the Project
+              </Link>
+            </div>
             <div className="flex justify-center items-center">
               <button
                 type="button"

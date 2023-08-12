@@ -13,7 +13,7 @@ const nunito = Nunito_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Where in the World?',
+  title: 'Flags',
   description: 'Encyclopedia Lite for Countries',
 }
 
