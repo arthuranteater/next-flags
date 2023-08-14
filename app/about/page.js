@@ -97,8 +97,46 @@ function About() {
       completed: false,
     },
     {
-      href: "User",
+      href: "order-list",
       story: "Drag countries to arrange order in lists (Logged-in user only)",
+      completed: false,
+    },
+  ];
+
+  const devStories = [
+    {
+      href: "test-unit",
+      story: "Run unit tests for all components",
+      completed: false,
+    },
+    {
+      href: "automate-testing",
+      story: "Run the test automatically on each push",
+      completed: false,
+    },
+    {
+      href: "test-end",
+      story: "Run automated end-to-end testing",
+      completed: false,
+    },
+    {
+      href: "write-typescript",
+      story: "Write the entire application using typescript",
+      completed: false,
+    },
+    {
+      href: "write-markdown",
+      story: "Write descriptive markdown file",
+      completed: false,
+    },
+    {
+      href: "convert-markdown",
+      story: "Convert markdown to inject html for this page",
+      completed: false,
+    },
+    {
+      href: "document-project",
+      story: "Document stories and findings",
       completed: false,
     },
   ];
@@ -134,6 +172,21 @@ function About() {
           <p>As a user I can...</p>
           <ul>
             {userStories.map(({ href, story, completed }, i) => (
+              <li
+                className="grid grid-cols-[30px_minmax(0,_500px)_50px] gap-2 mb-2 border-b"
+                key={story}
+              >
+                <span>{`${i + 1})`}</span>
+                <a href={`#${href}`}>{story}</a>
+                {completed && <FontAwesomeIcon icon={faCheck} />}
+              </li>
+            ))}
+          </ul>
+          <h2 className="font-bold">Developer Stories:</h2>
+          <p>Click on dev story to skip to that section</p>
+          <p>As a dev I can...</p>
+          <ul>
+            {devStories.map(({ href, story, completed }, i) => (
               <li
                 className="grid grid-cols-[30px_minmax(0,_500px)_50px] gap-2 mb-2 border-b"
                 key={story}
