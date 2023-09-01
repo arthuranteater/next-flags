@@ -1,7 +1,15 @@
+"use client";
+
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 function About() {
+  const { data: session } = useSession();
+  const { showForm, setShowForm } = useState(false);
+  console.log("session.user", session?.user);
+
   const userStories = [
     {
       href: "view-all",
@@ -204,6 +212,37 @@ function About() {
             REST Countries API get to 250? I don&apos;t know, but investigating
             further is outside the scope of this project.
           </p>
+          {session?.user ? (
+            <button
+              onClick={() => showForm(true)}
+              className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
+            >
+              <FontAwesomeIcon icon={faRightFromBracket} className="mr-2" />
+              Logout
+            </button>
+          ) : (
+            <>
+              {providers &&
+                Object.values(providers).map((provider) => (
+                  <button
+                    type="button"
+                    key={provider}
+                    className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
+                    onClick={() => signIn(provider.id)}
+                  >
+                    <FontAwesomeIcon icon={faGoogle} className="mr-2" />
+                    Login
+                  </button>
+                ))}
+            </>
+          )}
+          <button
+            onClick={() => signIn(provider.id)}
+            className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
+          >
+            <FontAwesomeIcon icon={faRightFromBracket} className="mr-2" />
+            {session?.user ? "Leave a Comment" : "Login to Comment"}
+          </button>
         </div>
       </div>
     </div>
