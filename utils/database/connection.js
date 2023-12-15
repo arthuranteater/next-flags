@@ -17,6 +17,6 @@ export async function connectToDB() {
     isConnected = true;
     console.log("connected to mongo");
   } catch (error) {
-    console.log(error);
+    console.log("Error connecting...", error);
   }
 }

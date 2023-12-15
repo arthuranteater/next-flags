@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getProviders } from "next-auth/react";
 
-
 export function UseProviders() {
     const [providers, setProviders] = useState(null);
 
@@ -11,14 +10,7 @@ export function UseProviders() {
           setProviders(response);
         })();
       }, []);
-  
-   
-  
-      document.addEventListener("click", handleClick, true);
-  
-      return () => {
-        document.removeEventListener("click", handleClick, true);
-      };
+
     }, [ref, cb]);
   
     return ref;

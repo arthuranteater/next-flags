@@ -1,115 +1,15 @@
-"use client";
-
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
+// import { useSession } from "next-auth/react";
+// import { useState } from "react";
+import Comments from "../components/comments";
+import { userStories } from "../../utils/mocks/stories";
+import Link from "next/link";
 
 function About() {
-  const { data: session } = useSession();
-  const { showForm, setShowForm } = useState(false);
-  console.log("session.user", session?.user);
-
-  const userStories = [
-    {
-      href: "view-all",
-      story: "View all countries as cards with summary info",
-      completed: true,
-    },
-    {
-      href: "click-card",
-      story: "Click on a country to go to detailed country page",
-      completed: true,
-    },
-    {
-      href: "view-details",
-      story: "View country details on details page",
-      completed: true,
-    },
-    {
-      href: "click-border",
-      story: "Click on border country to go detailed country page",
-      completed: true,
-    },
-    {
-      href: "click-back",
-      story: "Click back button on details page to go to previous page",
-      completed: true,
-    },
-    {
-      href: "filter-region",
-      story: "Filter countries by region",
-      completed: true,
-    },
-    {
-      href: "search-input",
-      story: "Filter by search input on change",
-      completed: true,
-    },
-    {
-      href: "view-number",
-      story: "View number of results in search bar",
-      completed: true,
-    },
-    {
-      href: "sort-alpha",
-      story: "Sort countries alphabetically (A to Z, Z to A)",
-      completed: true,
-    },
-    {
-      href: "sort-population",
-      story: "Sort countries by population (Sm to Lg, Lg to Sm)",
-      completed: true,
-    },
-    {
-      href: "click-dark",
-      story: "Click dark toggle to turn on/off dark mode",
-      completed: true,
-    },
-    {
-      href: "save-dark",
-      story: "When revisiting prev dark mode preference is loaded",
-      completed: true,
-    },
-    {
-      href: "initial-dark",
-      story: "If no prev visit, dark mode is loaded from user preferences",
-      completed: true,
-    },
-    {
-      href: "user-login",
-      story: "Click a log-in button, enter credentials and log-in",
-      completed: false,
-    },
-    {
-      href: "click-star",
-      story:
-        "Click toggle on country card/details page to add/remove from favorites (Logged-in user only)",
-      completed: false,
-    },
-    {
-      href: "view-prompt",
-      story:
-        "Receive prompt to login upon clicking star icon on card/details page",
-      completed: false,
-    },
-    {
-      href: "view-profile",
-      story: "View favorites on profile page (Logged-in user only)",
-      completed: false,
-    },
-    {
-      href: "drag-list",
-      story:
-        "Drag favorites into visited and wish list categories on profile page (Logged-in user only)",
-      completed: false,
-    },
-    {
-      href: "order-list",
-      story: "Drag countries to arrange order in lists (Logged-in user only)",
-      completed: false,
-    },
-  ];
+  // const { data: session } = useSession();
+  // const { showForm, setShowForm } = useState(false);
+  // console.log("session.user", session?.user);
 
   const devStories = [
     {
@@ -149,6 +49,23 @@ function About() {
     },
   ];
 
+  const comments = [
+    {
+      id: 456,
+      message: "Blah Blah Blah",
+      author: "ha",
+      likes: 0,
+      tags: ["web", "react", "next"],
+    },
+    {
+      id: 457,
+      message: "This site rocks",
+      author: "ha",
+      likes: 0,
+      tags: ["web", "react", "next"],
+    },
+  ];
+
   return (
     <div className="min-h-screen text-color-txt dark:text-dark-txt bg-color-bg dark:bg-dark-bg pl-10 pr-10 pt-[125px] sm:pt-20 pb-20">
       <h1 className="text-3xl text-center font-bold mb-6 mt-10">
@@ -179,13 +96,13 @@ function About() {
           <p>Click on user story to skip to that section</p>
           <p>As a user I can...</p>
           <ul>
-            {userStories.map(({ href, story, completed }, i) => (
+            {userStories.map(({ href, title, completed }, i) => (
               <li
                 className="grid grid-cols-[30px_minmax(0,_500px)_50px] gap-2 mb-2 border-b"
-                key={story}
+                key={title}
               >
                 <span>{`${i + 1})`}</span>
-                <a href={`#${href}`}>{story}</a>
+                <Link href={`/story-details/${href}`}>{title}</Link>
                 {completed && <FontAwesomeIcon icon={faCheck} />}
               </li>
             ))}
@@ -212,7 +129,8 @@ function About() {
             REST Countries API get to 250? I don&apos;t know, but investigating
             further is outside the scope of this project.
           </p>
-          {session?.user ? (
+          <Comments comments={comments} />
+          {/* {session?.user ? (
             <button
               onClick={() => showForm(true)}
               className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
@@ -235,14 +153,14 @@ function About() {
                   </button>
                 ))}
             </>
-          )}
-          <button
+          )} */}
+          {/* <button
             onClick={() => signIn(provider.id)}
             className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
           >
             <FontAwesomeIcon icon={faRightFromBracket} className="mr-2" />
             {session?.user ? "Leave a Comment" : "Login to Comment"}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

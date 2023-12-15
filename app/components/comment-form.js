@@ -10,5 +10,13 @@ export function CommentForm() {
   async function createComment() {
     return;
   }
-  return <section>Form</section>;
+  return (
+    <form onSubmit={createComment}>
+      <h2>Comment</h2>
+      <textarea></textarea>
+      <h2>Hashtags</h2>
+      <input placeholder="#React"></input>
+      <button type="submit">Submit</button>
+    </form>
+  );
 }

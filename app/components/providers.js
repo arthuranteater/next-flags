@@ -27,7 +27,8 @@ export default function Providers({ children, session }) {
   }, [dark]);
 
   return (
-    <SessionProvider session={session} authProvider={}>
+    //add auth provider to session to share authProvider={}
+    <SessionProvider session={session}>
       <DarkModeContext.Provider value={{ dark, setDark }}>
         {dark === "loading" ? (
           <div className="h-screen w-screen flex flex-col justify-center items-center text-color-txt">

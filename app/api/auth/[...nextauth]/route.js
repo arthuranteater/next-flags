@@ -28,6 +28,7 @@ const handler = NextAuth({
     },
     async signIn({ profile }) {
       try {
+        //serverless lambda function
         await connectToDB();
         //find user
         const userExists = await User.findOne({ email: profile.email });
