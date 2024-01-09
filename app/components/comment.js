@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faReply } from "@fortawesome/free-solid-svg-icons";
 // overflow-hidden
+
 export default function Comment({ comment }) {
   return (
     <div
