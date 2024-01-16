@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Comments from "../components/comments";
 import { userStories } from "../../utils/mocks/stories";
 import Link from "next/link";
+import Stories from "../components/stories";
 
 function About() {
   // const { data: session } = useSession();
@@ -95,7 +96,8 @@ function About() {
           <h2 className="font-bold">User Stories:</h2>
           <p>Click on user story to skip to that section</p>
           <p>As a user I can...</p>
-          <ul>
+          <Stories />
+          {/* <ul>
             {userStories.map(({ href, title, completed }, i) => (
               <li
                 className="grid grid-cols-[30px_minmax(0,_500px)_50px] gap-2 mb-2 border-b"
@@ -121,7 +123,7 @@ function About() {
                 {completed && <FontAwesomeIcon icon={faCheck} />}
               </li>
             ))}
-          </ul>
+          </ul> */}
           <p>
             * Countries is in quotes because there is not a single source of
             thruth for countries in the world. For example the United Nations
