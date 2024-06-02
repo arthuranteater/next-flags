@@ -7,7 +7,7 @@ import { userStories } from "../../utils/mocks/stories";
 import Link from "next/link";
 import Stories from "../components/stories";
 
-function About() {
+export default function About() {
   // const { data: session } = useSession();
   // const { showForm, setShowForm } = useState(false);
   // console.log("session.user", session?.user);
@@ -168,5 +168,3 @@ function About() {
     </div>
   );
 }
-
-export default About;
