@@ -19,7 +19,7 @@ import { UseClickAway } from "@/utils/hooks/useClickAway";
 export default function Navbar({ title }) {
   const { dark, setDark } = useContext(DarkModeContext);
   const { data: session } = useSession();
-  console.log("session.user", session?.user);
+  // console.log("session.user", session?.user);
   const [providers, setProviders] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -35,7 +35,7 @@ export default function Navbar({ title }) {
     setShowDropdown(false);
   };
 
-  console.log("providers", providers);
+  // console.log("providers", providers);
 
   const ref = UseClickAway(handleClose);
 

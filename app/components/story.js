@@ -35,10 +35,11 @@ export default function Story({ story, index }) {
     }
   });
   const { title, devstory, status } = storyData;
+  const slug = title.toLowerCase().replaceAll(" ", "-");
   return (
     <li className="grid grid-cols-[30px_minmax(0,_500px)_50px] gap-2 mb-2 border-b">
       <span>{`${index + 1})`}</span>
-      <Link href={`/story-details/${title}`}>{title}</Link>
+      <Link href={`/story-details/${slug}`}>{title}</Link>
       {status === "backlog" && <FontAwesomeIcon icon={faCircle} />}
       {status === "ready" && <FontAwesomeIcon icon={faCircle} />}
       {status === "inprogress" && <FontAwesomeIcon icon={faSpinner} />}

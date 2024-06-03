@@ -4,7 +4,6 @@ import { GET_STORIES } from "../../utils/api/github";
 
 export default async function Stories() {
   const { data } = await getClient().query({ query: GET_STORIES });
-  console.log("nodes", data.node.items.nodes);
   const stories = data.node.items.nodes;
 
   return (

@@ -32,17 +32,27 @@ export default function CountryDetail({ country, borderCountries }) {
 
   const borderCountryNames = borderCountries.map(({ name }) => name.common);
 
-  const nativeNamesArray = Object.values(nativeName).map(
-    ({ common }) => common
-  );
+  let nativeNamesArray = [];
+
+  if (nativeName) {
+    nativeNamesArray = Object.values(nativeName).map(({ common }) => common);
+  }
 
   const nativeNamesFiltered = nativeNamesArray.filter(
     (name, index) => nativeNamesArray.indexOf(name) === index
   );
 
-  const curriencesFiltered = Object.values(currencies).map(({ name }) => name);
+  let currenciesFiltered = [];
 
-  const languagesFiltered = Object.values(languages);
+  if (currencies) {
+    currenciesFiltered = Object.values(currencies).map(({ name }) => name);
+  }
+
+  let languagesFiltered = [];
+
+  if (languages) {
+    languagesFiltered = Object.values(languages);
+  }
 
   const { dark } = useContext(DarkModeContext);
 
@@ -115,10 +125,10 @@ export default function CountryDetail({ country, borderCountries }) {
               </li>
               <li className="font-bold mb-3">
                 Currencies:{" "}
-                {curriencesFiltered.map((name) => (
+                {currenciesFiltered.map((name) => (
                   <span className="font-normal" key={name}>
                     {name}
-                    {name !== curriencesFiltered.slice(-1)[0] ? ", " : ""}
+                    {name !== currenciesFiltered.slice(-1)[0] ? ", " : ""}
                   </span>
                 ))}
               </li>

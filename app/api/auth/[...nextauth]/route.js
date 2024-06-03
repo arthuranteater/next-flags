@@ -4,8 +4,6 @@ import GoogleProvider from "next-auth/providers/google";
 import { connectToDB } from "../../../../utils/database/connection";
 import User from "../../../../models/user";
 
-console.log("User", User);
-
 const handler = NextAuth({
   providers: [
     GoogleProvider({
