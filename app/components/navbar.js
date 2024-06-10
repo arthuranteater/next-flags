@@ -94,7 +94,7 @@ export default function Navbar({ title }) {
             >
               {session?.user ? (
                 <button
-                  onClick={signOut}
+                  onClick={() => signOut({ callbackUrl: "/" })}
                   className="border rounded-lg dark:border-none dark:bg-dark-bg focus:outline-none font-medium text-sm px-4 py-2 text-center mr-3"
                 >
                   <FontAwesomeIcon icon={faRightFromBracket} className="mr-2" />
