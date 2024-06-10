@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Profile() {
-  const { data: session } = useSession();
+  const { data: session } = useSession({ required: true });
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
